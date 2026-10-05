@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matmar Studio Incorporated — Trucking & Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+
+  
+  
+  <style>
+    :root {
+      --blue-deep:   #0A2A5E;
+      --blue-mid:    #1A4FAA;
+      --blue-bright: #2563EB;
+      --gray-dark:   #3A3D42;
+      --gray-mid:    #6B7280;
+      --gray-light:  #D1D5DB;
+      --gray-pale:   #F3F4F6;
+      --white:       #FFFFFF;
+      --black:       #0D0D0D;
+      --border:      3px solid var(--black);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--blue-deep);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 68px;
+      border-bottom: 4px solid var(--blue-bright);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue-bright); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--gray-light);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a.active {
+      border-bottom: 2px solid var(--blue-bright);
+      padding-bottom: 2px;
+    }
+
+    /* ── HERO BANNER ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, #0d3570 40%, var(--gray-dark) 100%);
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 60px 40px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.02) 40px,
+        rgba(255,255,255,0.02) 80px
+      );
+    }
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1200px;
+      width: 100%;
+    }
+    .hero-text { color: var(--white); }
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 2px;
+      background: var(--blue-bright);
+    }
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.92;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+    .hero-title em { color: var(--blue-bright); font-style: normal; display: block; }
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--gray-light);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 420px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--blue-bright);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      text-decoration: none;
+      border: 2px solid var(--blue-bright);
+      transition: background 0.2s, color 0.2s;
+      margin-right: 14px;
+    }
+    .btn-primary:hover { background: transparent; color: var(--blue-bright); }
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--white); }
+
+    /* ── HERO IMAGE BOX ── */
+    .hero-img-wrap {
+      position: relative;
+    }
+    .hero-img-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border: var(--border);
+      background: var(--gray-dark);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%) contrast(1.1);
+    }
+    /* Fallback truck illustration when image unavailable */
+
+
+.slider {
+    position: relative;
+    width: 600px;
+    height: 450px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+
+
+
+
+    .truck-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, #1a1a2e 0%, #162447 60%, #1a3a5c 100%);
+    }
+    .truck-svg { width: 82%; max-width: 380px; }
+    .hero-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--blue-bright);
+      border: var(--border);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--gray-dark);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+    }
+    .stat-item {
+      padding: 28px 60px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      flex: 1;
+      max-width: 260px;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 2.4rem;
+      color: var(--blue-bright);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gray-light);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 4px;
+    }
+
+    /* ── SECTION ── */
+    section { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
+
+    .section-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .section-tag::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--blue-mid);
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .section-title span { color: var(--blue-mid); }
+    .section-desc {
+      color: var(--gray-mid);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 540px;
+      margin-bottom: 48px;
+    }
+
+    /* ── SERVICES PREVIEW CARDS ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .svc-card {
+      border: var(--border);
+      padding: 36px 28px;
+      background: var(--white);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .svc-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--blue-mid);
+    }
+    .svc-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 6px 6px 0 var(--black);
+    }
+    .svc-icon {
+      font-size: 2.4rem;
+      margin-bottom: 18px;
+      display: block;
+    }
+    .svc-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .svc-desc { color: var(--gray-mid); font-size: 0.95rem; line-height: 1.6; }
+    .svc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+      text-decoration: none;
+    }
+    .svc-link:hover { color: var(--black); }
+
+    /* ── WHY US ── */
+    .why-strip {
+      background: var(--blue-deep);
+      padding: 70px 40px;
+    }
+    .why-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .why-text .section-tag { color: #93c5fd; }
+    .why-text .section-tag::before { background: #93c5fd; }
+    .why-text .section-title { color: var(--white); }
+    .why-text .section-title span { color: #93c5fd; }
+    .why-text .section-desc { color: var(--gray-light); max-width: 100%; margin-bottom: 0; }
+    .why-features { display: flex; flex-direction: column; gap: 20px; }
+    .why-feat {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .why-feat-icon {
+      background: var(--blue-bright);
+      border: 2px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      font-size: 1.3rem;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .why-feat-body h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .why-feat-body p { color: var(--gray-light); font-size: 0.9rem; line-height: 1.5; }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--gray-pale);
+      border-top: 3px solid var(--gray-light);
+      border-bottom: 3px solid var(--gray-light);
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .cta-band h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3rem);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .cta-band p { color: var(--gray-mid); margin-bottom: 32px; font-size: 1.05rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      color: var(--gray-light);
+      padding: 50px 40px 28px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 24px;
+    }
+    .footer-brand h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+    .footer-brand h3 span { color: var(--blue-bright); }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.7; color: #9ca3af; max-width: 300px; }
+    .footer-col h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: #6b7280;
+    }
+    
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Matmar<span>.</span>
+ <!-- <img class="Mlogo" src="images\nav_logo.png" class="nav-menu-icon" style="display:inline; width:100px; height:100px;"> -->
+ </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Trusted Logistics Partner</div>
+      <h1 class="hero-title">
+        Matmar Studio
+        <em>Incorporated</em>
+      </h1>
+      <p class="hero-sub">
+        Professional trucking, local moving, and commercial relocation services. 
+        Built on reliability, delivered with precision — every load, every mile.
+      </p>
+      <a href="services.html" class="btn-primary">Our Services</a>
+      <a href="contact.html" class="btn-outline">Get a Quote</a>
+    </div>
+    <div class="hero-img-wrap">
+      <div class="hero-img-box">
+        <!-- Inline SVG truck illustration -->
+        <div class="truck-placeholder">
+       
+            <div class="slider">
+          <div class="slides">
+        <img src="images/moving1.png" class="slide active">
+        <img src="images/moving2.jpg" class="slide">
+        <img src="images/moving3.jpg" class="slide">
+        <img src="images/moving4.jpg" class="slide">
+       </div>
+
+    <button class="prev" onclick="moveSlide(-1)">❮</button>
+    <button class="next" onclick="moveSlide(1)">❯</button>
+</div>
+      
+      
+      
+          
+        </div>
+      </div>
+      <div class="hero-badge">Matmar Studio Inc.</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <span class="stat-num">500+</span>
+    <span class="stat-label">Moves Completed</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">10+</span>
+    <span class="stat-label">Years Experience</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">3</span>
+    <span class="stat-label">Core Services</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">100%</span>
+    <span class="stat-label">Insured & Licensed</span>
+  </div>
+</div>
+
+<!-- SERVICES PREVIEW -->
+<section>
+  <div class="section-tag">What We Do</div>
+  <h2 class="section-title">Services That <span>Move</span> You Forward</h2>
+  <p class="section-desc">
+    From a single-room move to a full commercial relocation, Matmar Studio Incorporated handles it all — professionally, efficiently, and on schedule.
+  </p>
+  <div class="services-grid">
+    <div class="svc-card">
+      <span class="svc-icon">🏠</span>
+      <div class="svc-name">Local Moving</div>
+      <p class="svc-desc">Residential moves handled with care. We pack, load, transport, and place — so you can focus on settling in.</p>
+      <a href="services.html" class="svc-link">Learn More →</a>
+    </div>
+    <div class="svc-card">
+      <span class="svc-icon">📦</span>
+      <div class="svc-name">Delivery</div>
+      <p class="svc-desc">Fast, secure delivery for businesses and individuals. Fragile, bulky, or time-sensitive — we deliver on our promise.</p>
+      <a href="services.html" class="svc-link">Learn More →</a>
+    </div>
+    <div class="svc-card">
+      <span class="svc-icon">🏢</span>
+      <div class="svc-name">Commercial Relocation</div>
+      <p class="svc-desc">Minimal downtime, maximum precision. We relocate offices, warehouses, and businesses with full coordination support.</p>
+      <a href="services.html" class="svc-link">Learn More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<div class="why-strip">
+  <div class="why-inner">
+    <div class="why-text">
+      <div class="section-tag">Why Choose Us</div>
+      <h2 class="section-title">The Matmar <span>Difference</span></h2>
+      <p class="section-desc">
+        We're not just a trucking company — we're your logistics partner. Matmar Studio Incorporated was built on the belief that every move deserves professional care and transparent service.
+      </p>
+    </div>
+    <div class="why-features">
+      <div class="why-feat">
+        <div class="why-feat-icon">✓</div>
+        <div class="why-feat-body">
+          <h4>Fully Insured</h4>
+          <p>Your belongings are protected from pickup to delivery. Full cargo insurance on every job.</p>
+        </div>
+      </div>
+      <div class="why-feat">
+        <div class="why-feat-icon">⏱</div>
+        <div class="why-feat-body">
+          <h4>On-Time, Every Time</h4>
+          <p>We respect your schedule. Our team arrives on time and completes the job as quoted.</p>
+        </div>
+      </div>
+      <div class="why-feat">
+        <div class="why-feat-icon">💬</div>
+        <div class="why-feat-body">
+          <h4>Clear Communication</h4>
+          <p>No surprises. Upfront pricing, status updates, and a direct line to your crew.</p>
+        </div>
+      </div>
+      <div class="why-feat">
+        <div class="why-feat-icon">🚛</div>
+        <div class="why-feat-body">
+          <h4>Modern Fleet</h4>
+          <p>Well-maintained vehicles equipped to handle residential, commercial, and specialty loads.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Ready to Make Your Move?</h2>
+  <p>Contact Matmar Studio Incorporated for a free, no-obligation quote today.</p>
+  <a href="contact.html" class="btn-primary" style="background:var(--blue-deep); border-color:var(--blue-deep);">Get a Free Quote</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Matmar Studio <span>Inc.</span></h3>
+      <p>Professional trucking and logistics services. Licensed, insured, and committed to moving you forward.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Local Moving</a></li>
+        <li><a href="services.html">Delivery</a></li>
+        <li><a href="services.html">Commercial Relocation</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Matmar Studio Incorporated. All rights reserved.</span>
+    <span>Trusted Trucking & Logistics</span>
+  </div>
+</footer>
+
+</body>
+</html>
+
+  <script>
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+    });
+}
+
+function moveSlide(direction) {
+    currentSlide = (currentSlide + direction + slides.length) % slides.length;
+    showSlide(currentSlide);
+}
+
+// Auto-slide every 4 seconds
+setInterval(() => {
+    moveSlide(1);
+}, 2000);
+</script>
