@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Matmar Studio Incorporated</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-deep:   #0A2A5E;
+      --blue-mid:    #1A4FAA;
+      --blue-bright: #2563EB;
+      --gray-dark:   #3A3D42;
+      --gray-mid:    #6B7280;
+      --gray-light:  #D1D5DB;
+      --gray-pale:   #F3F4F6;
+      --white:       #FFFFFF;
+      --black:       #0D0D0D;
+      --border:      3px solid var(--black);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+    nav {
+      background: var(--blue-deep);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 68px;
+      border-bottom: 4px solid var(--blue-bright);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.5rem; color:var(--white); letter-spacing:0.04em; text-transform:uppercase; text-decoration:none; }
+    .nav-logo span { color:var(--blue-bright); }
+    .nav-links { display:flex; gap:36px; list-style:none; }
+    .nav-links a { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1.05rem; color:var(--gray-light); text-decoration:none; text-transform:uppercase; letter-spacing:0.08em; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--white); }
+    .nav-links a.active { color:var(--white); border-bottom:2px solid var(--blue-bright); padding-bottom:2px; }
+
+    /* BANNER */
+    .page-banner {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, #0d3570 50%, var(--gray-dark) 100%);
+      padding: 70px 40px 60px;
+      position: relative; overflow: hidden;
+    }
+    .page-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 80px);
+    }
+    .page-banner-inner { position: relative; max-width: 1200px; margin: 0 auto; }
+    .breadcrumb { font-family:'Barlow Condensed',sans-serif; font-size:0.82rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#93c5fd; margin-bottom:18px; }
+    .breadcrumb a { color:#93c5fd; text-decoration:none; }
+    .breadcrumb span { margin:0 8px; opacity:0.5; }
+    .page-banner h1 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(3rem,6vw,5rem); text-transform:uppercase; color:var(--white); line-height:0.92; letter-spacing:-0.01em; margin-bottom:16px; }
+    .page-banner h1 em { color:var(--blue-bright); font-style:normal; }
+    .page-banner p { color:var(--gray-light); font-size:1.05rem; max-width:520px; line-height:1.6; }
+
+    /* CONTACT LAYOUT */
+    .contact-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* INFO PANEL */
+    .info-panel {}
+    .section-tag {
+      font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; font-weight:700;
+      letter-spacing:0.2em; text-transform:uppercase; color:var(--blue-mid);
+      display:flex; align-items:center; gap:10px; margin-bottom:16px;
+    }
+    .section-tag::before { content:''; display:inline-block; width:24px; height:2px; background:var(--blue-mid); }
+    .info-title {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900;
+      font-size:clamp(2rem,4vw,3rem); text-transform:uppercase; line-height:1;
+      margin-bottom:20px;
+    }
+    .info-title span { color:var(--blue-mid); }
+    .info-desc { color:var(--gray-mid); font-size:1rem; line-height:1.7; margin-bottom:40px; }
+
+    .contact-cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+    .contact-card {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 22px 24px;
+      border: var(--border);
+      background: var(--white);
+      transition: box-shadow 0.2s;
+    }
+    .contact-card:hover { box-shadow: 4px 4px 0 var(--black); }
+    .contact-card-icon {
+      background: var(--blue-mid);
+      color: var(--white);
+      font-size: 1.3rem;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-card-body {}
+    .contact-card-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 4px;
+    }
+    .contact-card-value {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--black);
+    }
+    .contact-card-value a { color: var(--black); text-decoration: none; }
+    .contact-card-value a:hover { color: var(--blue-mid); text-decoration: underline; }
+
+    /* Hours box */
+    .hours-box {
+      border: var(--border);
+      padding: 28px;
+      background: var(--gray-pale);
+    }
+    .hours-box h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hours-box h4::before { content:'🕐'; font-size:1rem; }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--gray-light);
+      font-size: 0.95rem;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { font-weight: 600; }
+    .hours-row .time { color: var(--gray-mid); }
+    .hours-row.open .time { color: var(--blue-mid); font-weight: 600; }
+
+    /* FORM PANEL */
+    .form-panel {}
+    .form-box {
+      border: var(--border);
+      padding: 44px 40px;
+      background: var(--white);
+    }
+    .form-box h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .form-box .form-sub { color: var(--gray-mid); font-size: 0.95rem; margin-bottom: 32px; }
+
+    .form-group { margin-bottom: 22px; }
+    .form-group label {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-dark);
+      margin-bottom: 7px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid var(--gray-light);
+      background: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.97rem;
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue-bright);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 17px;
+      background: var(--blue-deep);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 2px solid var(--blue-deep);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-top: 8px;
+    }
+    .submit-btn:hover { background: transparent; color: var(--blue-deep); }
+
+    .form-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--gray-mid);
+    }
+    .form-note::before { content: '🔒'; font-size: 0.9rem; }
+    .field-error {
+      display: block;
+      color: #ef4444;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 5px;
+      letter-spacing: 0.02em;
+    }
+    .submit-btn:disabled { cursor: not-allowed; }
+
+    /* SUCCESS state */
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .success-msg .checkmark { font-size: 3rem; margin-bottom: 16px; }
+    .success-msg h4 {
+      font-family:'Barlow Condensed',sans-serif;
+      font-weight:800; font-size:1.8rem;
+      text-transform:uppercase; margin-bottom:12px;
+    }
+    .success-msg p { color: var(--gray-mid); }
+
+    /* MAP placeholder */
+    .map-section {
+      background: var(--gray-dark);
+      padding: 0;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-top: var(--border);
+      border-bottom: var(--border);
+    }
+    .map-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--blue-deep) 0%, var(--gray-dark) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .map-pin { font-size: 3rem; }
+    .map-text {
+      font-family:'Barlow Condensed',sans-serif;
+      font-weight:800;
+      font-size:1.8rem;
+      text-transform:uppercase;
+      color:var(--white);
+      text-align:center;
+      letter-spacing:0.02em;
+    }
+    .map-text span { color:var(--blue-bright); }
+    .map-sub { color:var(--gray-light); font-size:0.95rem; }
+
+    /* FOOTER */
+    footer { background:var(--black); color:var(--gray-light); padding:50px 40px 28px; }
+    .footer-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr; gap:48px; padding-bottom:36px; border-bottom:1px solid rgba(255,255,255,0.1); margin-bottom:24px; }
+    .footer-brand h3 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.6rem; color:var(--white); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:12px; }
+    .footer-brand h3 span { color:var(--blue-bright); }
+    .footer-brand p { font-size:0.9rem; line-height:1.7; color:#9ca3af; max-width:300px; }
+    .footer-col h4 { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.9rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--white); margin-bottom:16px; }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { margin-bottom:8px; }
+    .footer-col ul a { color:#9ca3af; text-decoration:none; font-size:0.9rem; transition:color 0.2s; }
+    .footer-col ul a:hover { color:var(--white); }
+    .footer-bottom { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; font-size:0.82rem; color:#6b7280; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Matmar<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- BANNER -->
+<div class="page-banner">
+  <div class="page-banner-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Contact</div>
+    <h1>Get In <em>Touch</em></h1>
+    <p>Request a free quote, ask about availability, or just say hello. Our team responds within one business day.</p>
+  </div>
+</div>
+
+<!-- CONTACT BODY -->
+<div class="contact-wrapper">
+
+  <!-- INFO -->
+  <div class="info-panel">
+    <div class="section-tag">Reach Us</div>
+    <h2 class="info-title">We're Ready <span>When You Are</span></h2>
+    <p class="info-desc">
+      Matmar Studio Incorporated is standing by to handle your next move. Get in touch and we'll put together a customized plan and quote for you — at no cost.
+    </p>
+
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="contact-card-icon">📞</div>
+        <div class="contact-card-body">
+          <div class="contact-card-label">Phone</div>
+          <div class="contact-card-value"><a href="tel:+15551234567">(555) 123-4567</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">✉️</div>
+        <div class="contact-card-body">
+          <div class="contact-card-label">Email</div>
+          <div class="contact-card-value"><a href="mailto:info@matmarstudio.com">info@matmarstudio.com</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-body">
+          <div class="contact-card-label">Service Area</div>
+          <div class="contact-card-value">Greater Metro Area & Surrounding Region</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hours-box">
+      <h4>Business Hours</h4>
+      <div class="hours-row open"><span class="day">Monday – Friday</span><span class="time">7:00 AM – 6:00 PM</span></div>
+      <div class="hours-row open"><span class="day">Saturday</span><span class="time">8:00 AM – 4:00 PM</span></div>
+      <div class="hours-row"><span class="day">Sunday</span><span class="time">By Appointment</span></div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-panel">
+    <div class="form-box">
+      <h3>Request a Free Quote</h3>
+      <p class="form-sub">Fill in the details below and we'll get back to you within one business day.</p>
+
+      <div id="quote-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="John" />
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="Smith" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="john@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="(555) 000-0000" />
+        </div>
+        <div class="form-group">
+          <label for="service">Service Required</label>
+          <select id="service">
+            <option value="" disabled selected>Select a service...</option>
+            <option>Local Moving</option>
+            <option>Delivery</option>
+            <option>Commercial Relocation</option>
+            <option>Multiple Services</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="move-from">Moving From</label>
+            <input type="text" id="move-from" placeholder="City or Address" />
+          </div>
+          <div class="form-group">
+            <label for="move-to">Moving To</label>
+            <input type="text" id="move-to" placeholder="City or Address" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="date">Preferred Move Date</label>
+          <input type="date" id="date" />
+        </div>
+        <div class="form-group">
+          <label for="message">Additional Details</label>
+          <textarea id="message" placeholder="Tell us about your move — size, special items, access considerations, etc."></textarea>
+        </div>
+        <button class="submit-btn" onclick="submitForm()">Send Quote Request →</button>
+        <p class="form-note">Your information is private and never shared with third parties.</p>
+      </div>
+
+      <div class="success-msg" id="success-msg">
+        <div class="checkmark">✅</div>
+        <h4>Message Sent!</h4>
+        <p>Thanks for reaching out to Matmar Studio Incorporated. We'll review your request and be in touch within one business day.</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- MAP STRIP -->
+<div class="map-section">
+  <div class="map-overlay">
+    <div class="map-pin">📍</div>
+    <div class="map-text">Serving the <span>Greater Metro Area</span></div>
+    <div class="map-sub">Contact us to confirm service availability in your location.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Matmar Studio <span>Inc.</span></h3>
+      <p>Professional trucking and logistics services. Licensed, insured, and committed to moving you forward.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Local Moving</a></li>
+        <li><a href="services.html">Delivery</a></li>
+        <li><a href="services.html">Commercial Relocation</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Matmar Studio Incorporated. All rights reserved.</span>
+    <span>Trusted Trucking & Logistics</span>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     EMAIL SETUP — EmailJS (free, no backend needed)
+     ─────────────────────────────────────────────────────────────
+     STEP 1: Create a free account at https://www.emailjs.com
+     STEP 2: Add an Email Service (Gmail, Outlook, etc.)
+             → Copy your Service ID → paste into EMAILJS_SERVICE_ID below
+     STEP 3: Create an Email Template using these variables:
+               {{from_name}}   — customer's full name
+               {{from_email}}  — customer's email address
+               {{phone}}       — customer's phone number
+               {{service}}     — service requested
+               {{move_from}}   — origin location
+               {{move_to}}     — destination location
+               {{move_date}}   — preferred move date
+               {{message}}     — additional details
+             → Copy your Template ID → paste into EMAILJS_TEMPLATE_ID below
+     STEP 4: Go to Account → API Keys → copy your Public Key
+             → paste into EMAILJS_PUBLIC_KEY below
+     STEP 5: In your EmailJS template, set "To Email" to:
+               info@matmarstudio.com   (or whichever address you want)
+  ═══════════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ── REPLACE THESE THREE VALUES WITH YOUR OWN ──
+  const EMAILJS_PUBLIC_KEY   = 'sSbhpKNga6buTO8HT';      // e.g. 'abcXYZ123...'
+  const EMAILJS_SERVICE_ID   = 'service_7hur6gf';      // e.g. 'service_abc123'
+  const EMAILJS_TEMPLATE_ID  = 'template_jya93eo';     // e.g. 'template_xyz456'
+  // ──────────────────────────────────────────────
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  // ── VALIDATION HELPERS ──
+  function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  function showError(id, msg) {
+    const el = document.getElementById(id);
+    el.style.borderColor = '#ef4444';
+    let err = el.parentElement.querySelector('.field-error');
+    if (!err) { err = document.createElement('span'); err.className = 'field-error'; el.parentElement.appendChild(err); }
+    err.textContent = msg;
+  }
+  function clearErrors() {
+    document.querySelectorAll('.field-error').forEach(e => e.remove());
+    document.querySelectorAll('input, select, textarea').forEach(el => el.style.borderColor = '');
+  }
+
+  // ── MAIN SUBMIT FUNCTION ──
+  async function submitForm() {
+    clearErrors();
+
+    const fname   = document.getElementById('fname').value.trim();
+    const lname   = document.getElementById('lname').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value;
+    const mfrom   = document.getElementById('move-from').value.trim();
+    const mto     = document.getElementById('move-to').value.trim();
+    const date    = document.getElementById('date').value;
+    const message = document.getElementById('message').value.trim();
+
+    // Validate
+    let hasError = false;
+    if (!fname) { showError('fname', 'First name is required.'); hasError = true; }
+    if (!lname) { showError('lname', 'Last name is required.'); hasError = true; }
+    if (!email) { showError('email', 'Email address is required.'); hasError = true; }
+    else if (!isValidEmail(email)) { showError('email', 'Please enter a valid email address.'); hasError = true; }
+    if (!phone) { showError('phone', 'Phone number is required.'); hasError = true; }
+    if (!service) { showError('service', 'Please select a service.'); hasError = true; }
+    if (hasError) return;
+
+    // Show loading state
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    const templateParams = {
+      from_name:  `${fname} ${lname}`,
+      from_email: email,
+      phone:      phone || 'Not provided',
+      service:    service || 'Not specified',
+      move_from:  mfrom  || 'Not specified',
+      move_to:    mto    || 'Not specified',
+      move_date:  date   || 'Not specified',
+      message:    message || 'No additional details provided.',
+    };
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+      // Success
+      document.getElementById('quote-form').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    } catch (err) {
+      // Error — show inline message
+      btn.textContent = 'Send Quote Request →';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      let errBox = document.getElementById('send-error');
+      if (!errBox) {
+        errBox = document.createElement('p');
+        errBox.id = 'send-error';
+        errBox.style.cssText = 'color:#ef4444;font-size:0.9rem;margin-top:14px;font-weight:600;';
+        btn.parentElement.insertBefore(errBox, btn.nextSibling);
+      }
+      errBox.textContent = '⚠ Something went wrong. Please try again or email us directly at info@matmarstudio.com';
+      console.error('EmailJS error:', err);
+    }
+  }
+</script>
+
+</body>
+</html>
